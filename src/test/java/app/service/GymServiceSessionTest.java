@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Занятия: создание, чтение, фильтры, изменение, удаление. */
 class GymServiceSessionTest {
 
     private GymService service;
@@ -33,7 +32,6 @@ class GymServiceSessionTest {
         return sessions.stream().map(Session::getName).toList();
     }
 
-    // ---------- создание ----------
 
     @Test
     @DisplayName("Занятиям выдаются последовательные id, свободны все места")
@@ -72,7 +70,6 @@ class GymServiceSessionTest {
         assertEquals(1, session.getId());
     }
 
-    // ---------- чтение ----------
 
     @Test
     @DisplayName("getSession возвращает созданное занятие")
@@ -88,7 +85,6 @@ class GymServiceSessionTest {
         assertThrows(NotFoundException.class, () -> service.getSession(999));
     }
 
-    // ---------- список и фильтры ----------
 
     @Test
     @DisplayName("Без фильтров приходят все занятия в порядке создания")
@@ -123,7 +119,6 @@ class GymServiceSessionTest {
         assertTrue(service.listSessions(null, "zzz").isEmpty());
     }
 
-    // ---------- изменение ----------
 
     @Test
     @DisplayName("updateSession меняет название и вместимость")
@@ -184,7 +179,6 @@ class GymServiceSessionTest {
         assertThrows(NotFoundException.class, () -> service.updateSession(999, "X", 5));
     }
 
-    // ---------- удаление ----------
 
     @Test
     @DisplayName("Пустое занятие удаляется")

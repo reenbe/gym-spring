@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Клиенты: создание, чтение, фильтры, изменение, удаление. Без Spring, с настоящими in-memory репозиториями. */
+
 class GymServiceMemberTest {
 
     private GymService service;
@@ -33,7 +33,6 @@ class GymServiceMemberTest {
         return members.stream().map(Member::getName).toList();
     }
 
-    // ---------- создание ----------
 
     @Test
     @DisplayName("Клиентам выдаются последовательные id начиная с 1")
@@ -84,7 +83,6 @@ class GymServiceMemberTest {
         assertEquals(2, service.listMembers(null, null, null).size());
     }
 
-    // ---------- чтение ----------
 
     @Test
     @DisplayName("getMember возвращает созданного клиента")
@@ -100,7 +98,6 @@ class GymServiceMemberTest {
         assertThrows(NotFoundException.class, () -> service.getMember(999));
     }
 
-    // ---------- список и фильтры ----------
 
     @Test
     @DisplayName("Без фильтров приходят все клиенты в порядке создания")
@@ -170,7 +167,7 @@ class GymServiceMemberTest {
         assertTrue(service.listMembers(null, "zzz", null).isEmpty());
     }
 
-    // ---------- изменение ----------
+
 
     @Test
     @DisplayName("updateMember меняет имя и возраст, id и тип остаются")
@@ -224,8 +221,6 @@ class GymServiceMemberTest {
     void updateUnknownMemberFails() {
         assertThrows(NotFoundException.class, () -> service.updateMember(999, null, "X", 25));
     }
-
-    // ---------- удаление ----------
 
     @Test
     @DisplayName("Удалённый клиент исчезает из хранилища и списка")

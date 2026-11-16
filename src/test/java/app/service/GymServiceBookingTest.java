@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-/** Запись на занятие и отмена: главная операция, которая меняет состояние по правилам. */
 class GymServiceBookingTest {
 
     private GymService service;
@@ -34,7 +33,6 @@ class GymServiceBookingTest {
         return members.stream().map(Member::getName).toList();
     }
 
-    // ---------- запись: успех и изменение состояния ----------
 
     @Test
     @DisplayName("Запись добавляет клиента и уменьшает число свободных мест")
@@ -80,7 +78,6 @@ class GymServiceBookingTest {
         assertEquals(0, service.getSession(session.getId()).getFreePlaces());
     }
 
-    // ---------- запись: ошибки ----------
 
     @Test
     @DisplayName("Повторная запись запрещена и не увеличивает счётчик посещений")
@@ -112,8 +109,6 @@ class GymServiceBookingTest {
         assertThrows(NotFoundException.class, () -> service.book(999, member.getId()));
         assertThrows(NotFoundException.class, () -> service.book(session.getId(), 999));
     }
-
-    // ---------- лимиты абонементов ----------
 
     @Test
     @DisplayName("SILVER: восьмая запись проходит, девятая отклоняется и ничего не меняет")
@@ -171,7 +166,6 @@ class GymServiceBookingTest {
         assertEquals(12, gold.getVisits());
     }
 
-    // ---------- отмена ----------
 
     @Test
     @DisplayName("Отмена освобождает место и уменьшает счётчик посещений")
@@ -222,8 +216,6 @@ class GymServiceBookingTest {
         assertThrows(NotFoundException.class, () -> service.cancel(999, member.getId()));
         assertThrows(NotFoundException.class, () -> service.cancel(session.getId(), 999));
     }
-
-    // ---------- связи ----------
 
     @Test
     @DisplayName("membersOf возвращает записанных клиентов, sessionsOf возвращает занятия клиента")
